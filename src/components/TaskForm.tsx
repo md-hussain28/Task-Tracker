@@ -1,14 +1,11 @@
-// src/components/TaskForm.tsx
 import React, { useState } from 'react';
-import {
-  TextField,
-  Button,
-  MenuItem,
-  Grid,
-  Paper,
-  Typography,
-} from '@mui/material';
-import { Task } from '../store/interface'; // Adjust the import path accordingly
+import { Box, Button, Typography, Grow, ThemeProvider } from '@mui/material';
+import { Task } from '../store/interface';
+import { AssignmentTurnedIn } from '@mui/icons-material';
+import darkTheme from './taskform/theme'; // Import theme
+import StyledPaper from './taskform/StyledPaper';
+import TaskTextField from './taskform/TaskTextField';
+import TaskSelect from './taskform/TaskSelect';
 
 interface TaskFormProps {
   onSubmit: (task: Task) => void;
@@ -21,11 +18,13 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
     projectName: '',
     description: '',
     deadline: new Date(),
-    priority: 'Medium', // Default priority
-    status: 'PENDING', // Default status
+    priority: 'Medium',
+    status: 'PENDING',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent
+  ) => {
     const { name, value } = e.target;
     setTask((prevTask) => ({
       ...prevTask,
@@ -44,103 +43,88 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
       deadline: new Date(),
       priority: 'Medium',
       status: 'PENDING',
-    }); // Reset form after submission
+    });
   };
 
   return (
-    <Paper elevation={3} style={{ padding: '20px', maxWidth: '600px', margin: '20px auto' }}>
-      <Typography variant="h4" gutterBottom>
-        Create Task
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="taskName"
+    <ThemeProvider theme={darkTheme}>
+      <StyledPaper>
+        <Typography variant="h4" gutterBottom color="primary" align="center" fontWeight="bold">
+          Create New Task
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Box display="grid" gap={3} gridTemplateColumns="repeat(2, 1fr)">
+            <TaskTextField
               label="Task Name"
-              variant="outlined"
+              name="taskName"
               value={task.taskName}
               onChange={handleChange}
-              required
+              icon={<AssignmentTurnedIn color="primary" />}
             />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="projectName"
+            <TaskTextField
               label="Project Name"
-              variant="outlined"
+              name="projectName"
               value={task.projectName}
               onChange={handleChange}
-              required
+              icon={<AssignmentTurnedIn color="primary" />}
             />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="description"
-              label="Description"
-              variant="outlined"
-              value={task.description}
-              onChange={handleChange}
-              multiline
-              rows={4}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="deadline"
+            <Grow in={true} timeout={1400}>
+              <Box gridColumn="1 / -1">
+                <TaskTextField
+                  label="Description"
+                  name="description"
+                  value={task.description}
+                  onChange={handleChange}
+                  multiline
+                  rows={4}
+                />
+              </Box>
+            </Grow>
+            <TaskTextField
               label="Deadline"
+              name="deadline"
+              value={task.deadline.toISOString().split('T')[0]}
               type="date"
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
-              value={task.deadline.toISOString().substring(0, 10)} // Format date
               onChange={handleChange}
-              required
+              icon={<AssignmentTurnedIn color="primary" />}
             />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              select
-              name="priority"
+            <TaskSelect
               label="Priority"
-              variant="outlined"
+              name="priority"
               value={task.priority}
               onChange={handleChange}
-              required
-            >
-              <MenuItem value="Critical">Critical</MenuItem>
-              <MenuItem value="Medium">Medium</MenuItem>
-              <MenuItem value="Low">Low</MenuItem>
-            </TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              select
-              name="status"
+              options={[
+                { value: 'Critical', label: 'Critical' },
+                { value: 'Medium', label: 'Medium' },
+                { value: 'Low', label: 'Low' },
+              ]}
+            />
+            <TaskSelect
               label="Status"
-              variant="outlined"
+              name="status"
               value={task.status}
               onChange={handleChange}
-              required
-            >
-              <MenuItem value="DONE">DONE</MenuItem>
-              <MenuItem value="PENDING">PENDING</MenuItem>
-            </TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Add Task
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-    </Paper>
+              options={[
+                { value: 'DONE', label: 'Done' },
+                { value: 'PENDING', label: 'Pending' },
+              ]}
+            />
+            <Box gridColumn="1 / -1">
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+                fullWidth
+                size="large"
+                startIcon={<AssignmentTurnedIn />}
+              >
+                Create Task
+              </Button>
+            </Box>
+          </Box>
+        </form>
+      </StyledPaper>
+    </ThemeProvider>
   );
 };
 
