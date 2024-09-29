@@ -49,7 +49,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <StyledPaper theme={darkTheme}>
+      <StyledPaper >
         <Typography variant="h4" gutterBottom color="primary" align="center" fontWeight="bold">
           Create New Task
         </Typography>

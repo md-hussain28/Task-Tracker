@@ -5,13 +5,14 @@ import MainLayout from './components/MainLayout';
 import AddTask from './pages/AddTask';
 import TaskList from './pages/TaskList';
 import ProjectOverview from './pages/ProjectOverview';
+import Home from './pages/Home'
 
 const App: React.FC = () => {
     return (
         <Router>
             <MainLayout>
                 <Routes>
-                    
+                    <Route path="/" element={<Home />} />
                     <Route path="/add-task" element={<AddTask />} />
                     <Route path="/task-list" element={<TaskList />} />
                     <Route path="/project-overview" element={<ProjectOverview />} />

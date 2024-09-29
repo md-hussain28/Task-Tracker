@@ -12,7 +12,8 @@ import {
   Add as AddIcon, 
   List as ListIcon, 
   Dashboard as DashboardIcon,
-  Assignment as AssignmentIcon
+  Assignment as AssignmentIcon,
+  House as HomeIcon
 } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import { styled } from '@mui/system';
@@ -39,6 +40,7 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
 
   const menuItems = [
+    { text: 'Home', icon: <HomeIcon />, path: '/' },
     { text: 'Add Task', icon: <AddIcon />, path: '/add-task' },
     { text: 'Task List', icon: <ListIcon />, path: '/task-list' },
     { text: 'Project Overview', icon: <DashboardIcon />, path: '/project-overview' },
@@ -49,7 +51,7 @@ const Sidebar: React.FC = () => {
       <Box sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
         <AssignmentIcon color="primary" fontSize="large" />
         <Typography variant="h6" color="primary">
-          Task Manager
+        Task Tracker
         </Typography>
       </Box>
       <Divider sx={{ mb: 2 }} />
