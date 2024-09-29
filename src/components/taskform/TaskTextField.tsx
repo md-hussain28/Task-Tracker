@@ -1,6 +1,5 @@
 import React from 'react';
-import { TextField, Grow } from '@mui/material';
-import { InputAdornment } from '@mui/material';
+import { TextField, Grow, InputAdornment } from '@mui/material';
 
 interface TaskTextFieldProps {
   label: string;
@@ -34,13 +33,26 @@ const TaskTextField: React.FC<TaskTextFieldProps> = ({
       rows={rows}
       type={type}
       variant="outlined"
-      InputProps={
-        icon
-          ? {
-              startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
-            }
-          : undefined
-      }
+      InputProps={{
+        startAdornment: icon ? (
+          <InputAdornment position="start">{icon}</InputAdornment>
+        ) : undefined,
+      }}
+      // Responsive styles
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '12px', // Customize border radius
+        },
+        // Adjust font size and padding for different screen sizes
+        fontSize: {
+          xs: '0.875rem', // 14px for extra-small screens
+          sm: '1rem',     // 16px for small screens and up
+        },
+        padding: {
+          xs: '8px 10px', // Adjust padding for mobile
+          sm: '12px 14px', // Standard padding for larger screens
+        },
+      }}
     />
   </Grow>
 );

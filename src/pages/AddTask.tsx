@@ -39,6 +39,10 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundImage: 'linear-gradient(to bottom right, #2C2C2C, #1E1E1E)',
   boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+  // Ensure it takes up full height
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
 }));
 
 const AddTask: React.FC = () => {
@@ -52,13 +56,22 @@ const AddTask: React.FC = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Container maxWidth="md">
+      <Container 
+        maxWidth="md" 
+        sx={{ 
+          height: '100vh', // Full height of the viewport
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center' 
+        }}
+      >
         <StyledPaper elevation={3}>
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              flexGrow: 1, // Allow Box to take available space
             }}
           >
             <Box

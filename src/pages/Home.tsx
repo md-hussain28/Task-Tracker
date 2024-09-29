@@ -1,5 +1,5 @@
 // HomePage.tsx
-import React from 'react';
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -9,49 +9,52 @@ import {
   Grid,
   Card,
   CardContent,
-} from '@mui/material';
-import { styled } from '@mui/system';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+  Box, // Import Box
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { styled } from "@mui/system";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // Styled components
 const StyledHeader = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  boxShadow: 'none',
+  boxShadow: "none",
 }));
 
-const HeroSection = styled('section')(({ theme }) => ({
+const HeroSection = styled("section")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   padding: theme.spacing(4),
-  textAlign: 'center',
+  textAlign: "center",
   marginBottom: theme.spacing(4),
+  flexGrow: 1, // Make it flexible
 }));
 
 const FeatureCard = styled(Card)(({ theme }) => ({
   boxShadow: `0 4px 10px 0 ${theme.palette.common.black}`,
   borderRadius: theme.shape.borderRadius,
-  transition: 'transform 0.3s, box-shadow 0.3s',
-  '&:hover': {
-    transform: 'scale(1.05)',
+  transition: "transform 0.3s, box-shadow 0.3s",
+  "&:hover": {
+    transform: "scale(1.05)",
     boxShadow: `0 6px 15px 0 ${theme.palette.common.black}`,
   },
 }));
 
-const Footer = styled('footer')(({ theme }) => ({
-  textAlign: 'center',
-  padding: '20px',
+const Footer = styled("footer")(({ theme }) => ({
+  textAlign: "center",
+  padding: "20px",
   backgroundColor: theme.palette.grey[900],
   color: theme.palette.common.white,
-  marginTop: '40px',
+  marginTop: "40px",
 }));
 
 const QuoteTypography = styled(Typography)(({ theme }) => ({
-  fontSize: '1.5rem', // Adjust size as needed
-  fontStyle: 'italic',
-  textAlign: 'center',
+  fontSize: "1.5rem", // Adjust size as needed
+  fontStyle: "italic",
+  textAlign: "center",
   color: theme.palette.common.white,
-  margin: '0 auto',
-  maxWidth: '800px', // Limit width for better readability
+  margin: "0 auto",
+  maxWidth: "800px", // Limit width for better readability
 }));
 
 const HomePage: React.FC = () => {
@@ -61,7 +64,7 @@ const HomePage: React.FC = () => {
     "Success usually comes to those who are too busy to be looking for it.",
     "Don't watch the clock; do what it does. Keep going.",
   ];
-  
+
   const [currentQuoteIndex, setCurrentQuoteIndex] = React.useState(0);
 
   // Example function to rotate quotes, you can set this up with a timer or button click
@@ -74,10 +77,16 @@ const HomePage: React.FC = () => {
   }, [quotes.length]);
 
   return (
-    <div>
+    <Box 
+      sx={{ 
+        display: "flex", 
+        flexDirection: "column", 
+        minHeight: "100vh" // Set minimum height to 100% of the viewport height
+      }}
+    >
       <StyledHeader position="static">
         <Toolbar>
-          <QuoteTypography variant="h6"  sx={{ flexGrow: 1 }}>
+          <QuoteTypography variant="h6" sx={{ flexGrow: 1 }}>
             "{quotes[currentQuoteIndex]}"
           </QuoteTypography>
         </Toolbar>
@@ -91,16 +100,18 @@ const HomePage: React.FC = () => {
           Organize your tasks efficiently and effectively.
         </Typography>
         <Typography variant="body1" paragraph>
-          This application allows you to create, edit, and manage tasks easily. 
-          Keep track of your deadlines, prioritize your work, and ensure nothing 
+          This application allows you to create, edit, and manage tasks easily.
+          Keep track of your deadlines, prioritize your work, and ensure nothing
           falls through the cracks.
         </Typography>
-        <Button variant="contained" color="secondary" href="/add-task">
-          Get Started
-        </Button>
+        <Link to="/add-task">
+          <Button variant="contained" color="secondary">
+            Get Started
+          </Button>
+        </Link>
       </HeroSection>
 
-      <Container>
+      <Container sx={{ flexGrow: 1 }}>
         <Typography variant="h4" gutterBottom align="center">
           Key Features
         </Typography>
@@ -148,12 +159,18 @@ const HomePage: React.FC = () => {
         <Typography variant="body2" color="inherit">
           Developed by Md Saquib Hussain
         </Typography>
-        <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center' }}>
+        <div
+          style={{
+            marginTop: "10px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <a
             href="https://github.com/md-hussain28"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ marginRight: '15px', color: 'inherit' }}
+            style={{ marginRight: "15px", color: "inherit" }}
           >
             <GitHubIcon fontSize="large" />
           </a>
@@ -161,7 +178,7 @@ const HomePage: React.FC = () => {
             href="https://www.linkedin.com/in/md-saquib-hussain/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: 'inherit' }}
+            style={{ color: "inherit" }}
           >
             <LinkedInIcon fontSize="large" />
           </a>
@@ -170,7 +187,7 @@ const HomePage: React.FC = () => {
           © {new Date().getFullYear()} My Task App. All Rights Reserved.
         </Typography>
       </Footer>
-    </div>
+    </Box>
   );
 };
 

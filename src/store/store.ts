@@ -34,4 +34,4 @@ export const useTaskStore = create<TaskStore>((set) => ({
             return a.deadline.getTime() - b.deadline.getTime();
         }),
     })),
-}));
+})); 
