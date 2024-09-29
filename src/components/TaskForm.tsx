@@ -23,9 +23,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
     status: 'PENDING',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>|any
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>|any) => {
     const { name, value } = e.target;
     setTask((prevTask) => ({
       ...prevTask,

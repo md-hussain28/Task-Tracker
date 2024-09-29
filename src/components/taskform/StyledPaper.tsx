@@ -1,9 +1,9 @@
 import { styled } from '@mui/system';
 import { Paper } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-import { Theme } from '@mui/material/styles';
+import theme from './theme'
 
-const StyledPaper = styled(Paper)(({ theme }: { theme: Theme }) => ({
+const StyledPaper = styled(Paper)(() => ({
   padding: theme.spacing(4),
   margin: theme.spacing(2),
   backgroundColor: alpha(theme.palette.background.paper, 0.8),
