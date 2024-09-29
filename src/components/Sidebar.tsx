@@ -74,7 +74,7 @@ const Sidebar: React.FC = () => {
       <Divider sx={{ mt: 2 }} />
       <Box sx={{ p: 2 }}>
         <Typography variant="body2" color="text.secondary">
-          © 2023 Task Manager
+          © 2024 Task Manager MSH28
         </Typography>
       </Box>
     </Box>

@@ -1,8 +1,9 @@
+// TaskForm.tsx
 import React, { useState } from 'react';
 import { Box, Button, Typography, Grow, ThemeProvider } from '@mui/material';
 import { Task } from '../store/interface';
 import { AssignmentTurnedIn } from '@mui/icons-material';
-import darkTheme from './taskform/theme'; // Import theme
+import darkTheme from './taskform/theme'; // Import your theme
 import StyledPaper from './taskform/StyledPaper';
 import TaskTextField from './taskform/TaskTextField';
 import TaskSelect from './taskform/TaskSelect';
@@ -23,7 +24,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>|any
   ) => {
     const { name, value } = e.target;
     setTask((prevTask) => ({
@@ -48,7 +49,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <StyledPaper>
+      <StyledPaper theme={darkTheme}>
         <Typography variant="h4" gutterBottom color="primary" align="center" fontWeight="bold">
           Create New Task
         </Typography>
